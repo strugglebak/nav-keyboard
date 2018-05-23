@@ -1,7 +1,7 @@
 // Initalize the keyboard
 var keys = {
   0:['q','w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-  1:['a','s', 'd', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+  1:['a','s', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
   2:['z','x', 'c', 'v', 'b', 'n', 'm'],
   length: 3
 };
@@ -33,14 +33,18 @@ if (hashLocalStorage) {
 
 // Generate the keyboard
 for(var i = 0; i < keys.length; i++) {
-  var span = document.createElement('span');
-  wrapper.appendChild(span);
+  // var span = document.createElement('span');
+  // wrapper.appendChild(span);
+  var div = document.createElement('div');
+  div.className = 'row';
+  wrapper.appendChild(div);
 
   for (var j = 0; j < keys[i].length; j++) {
     // add kbd
     var kbd = document.createElement('kbd');
+    kbd.className = 'key';
     kbd.textContent = keys[i][j];
-    span.appendChild(kbd);
+    div.appendChild(kbd);
 
     // add edit button
     var editButton = document.createElement('button');
@@ -56,6 +60,12 @@ for(var i = 0; i < keys.length; i++) {
       localStorage.setItem('newUrl',JSON.stringify(hash));
     }
     kbd.append(editButton);
+
+    // add the icon of the website
+    var iconImg = document.createElement('img');
+    iconImg.src = 'http://' + hash[keys[i][j]] + '/favicon.ico';
+    console.log(iconImg.src);
+    kbd.append(iconImg);
   }
 }
 
