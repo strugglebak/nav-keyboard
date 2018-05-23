@@ -5,44 +5,78 @@
 a {
   text-decoration: none;
 }
+body {
+  background: #747980 url('images/wall8.jpg') no-repeat center center;
+  background-size: cover;
+}
 
 main {
-  margin-top: 100px;
+  border: 1px solid red;
+
+  /* 使键盘整体居中 */
+  display: flex;
+  /* 左右居中 */
+  align-items: center;
+  /* 上下居中 */
+  justify-content: center;
+
+  text-align: center;
+
+  /* 让 main 与 body 一样高*/
+  height: 100vh;
+}
+.row {
+  margin: 7px 0;
+}
+.row > .key {
+  margin: 0 5px;
 }
 
 #wrapper {
-  text-align: center;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
 }
 
-#wrapper > span {
+#wrapper > div {
+}
+#wrapper > div:nth-child(2) {
+  margin-left: -28px;
+}
+#wrapper > div:nth-child(3) {
+  margin-left: -85px;
+}
+#wrapper > div > kbd {
   display: inline-block;
-  border: 1px red solid;
-}
-#wrapper > span:nth-child(2) {
-  margin-left: 4em;
-}
-#wrapper > span:nth-child(3) {
-  margin-left: 4em;
-}
-#wrapper > span > kbd {
-  display: inline-block;
-  width: 4em;
-  height: 4em;
+  width: 50px;
+  height: 50px;
   text-transform: uppercase;
   position: relative;
 
-  background: #363738;
   color: #f7f7f7;
-  border: 1px solid #404040;
+  /* background css gradient*/
+  background: linear-gradient(to bottom, #292929 0%, #111111 100%);
+  border: none;
   border-radius: 6px;
-  margin-left: 8px;
+  /* 外围两圈 box-shadow,再加一层下面的阴影 */
+  box-shadow: 0 0 0 1px #1a1b1c, 0 0 0 2px ##1f2020,
+                0 3px 2px #080808;
+
+  /* 使键盘冒居中 */
+  display: inline-flex;
+  /* 左右居中 */
+  align-items: center;
+  /* 上下居中 */
+  justify-content: center;
+
+  font-size: 16px;
+  font-family: Helvetica;
 }
-#wrapper > span > kbd > button {
+#wrapper > div > kbd > button {
   position: absolute;
   right: 0;
   bottom: 0;
   display: none;
 }
-#wrapper > span > kbd:hover > button {
+#wrapper > div > kbd:hover > button {
   display: inline-block;
 }
