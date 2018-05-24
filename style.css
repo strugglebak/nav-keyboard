@@ -10,9 +10,15 @@ body {
   background-size: cover;
 }
 
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
 main {
   border: 1px solid red;
-
   /* 使键盘整体居中 */
   display: flex;
   /* 左右居中 */
@@ -21,15 +27,30 @@ main {
   justify-content: center;
 
   text-align: center;
-
   /* 让 main 与 body 一样高*/
   height: 100vh;
 }
+
+
 .row {
   margin: 7px 0;
 }
-.row > .key {
+.row .key {
   margin: 0 5px;
+  position: relative;
+}
+.row .key .keytext {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+}
+.row .key > img {
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
 }
 
 #wrapper {
@@ -38,6 +59,9 @@ main {
 }
 
 #wrapper > div {
+  /*border: 1px solid red;*/
+  padding: 0;
+  margin: 0;
 }
 #wrapper > div:nth-child(2) {
   margin-left: -28px;
@@ -60,13 +84,6 @@ main {
   /* 外围两圈 box-shadow,再加一层下面的阴影 */
   box-shadow: 0 0 0 1px #1a1b1c, 0 0 0 2px ##1f2020,
                 0 3px 2px #080808;
-
-  /* 使键盘冒居中 */
-  display: inline-flex;
-  /* 左右居中 */
-  align-items: center;
-  /* 上下居中 */
-  justify-content: center;
 
   font-size: 16px;
   font-family: Helvetica;

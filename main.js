@@ -43,8 +43,14 @@ for(var i = 0; i < keys.length; i++) {
     // add kbd
     var kbd = document.createElement('kbd');
     kbd.className = 'key';
-    kbd.textContent = keys[i][j];
+    // kbd.textContent = keys[i][j];
     div.appendChild(kbd);
+
+    // add text in span
+    var span = document.createElement('span');
+    span.className = 'keytext'
+    span.textContent = keys[i][j];
+    kbd.appendChild(span);
 
     // add edit button
     var editButton = document.createElement('button');
