@@ -15,11 +15,11 @@ var hash = {
   y: 'uc.com',
   i: 'iqiyi.com',
   o: 'opera.com',
-  p: undefined,
-  a: 'acfun.com',
+  a: 'acfun.cn',
   s: 'sohu.com',
   d: 'developer.mozilla.org',
   z: 'zhihu.com',
+  b: 'bilibili.com',
   m: 'mcdonalds.com'
 };
 
@@ -52,6 +52,7 @@ for(var i = 0; i < keys.length; i++) {
     span.textContent = keys[i][j];
     kbd.appendChild(span);
 
+
     // add edit button
     var editButton = document.createElement('button');
     editButton.textContent = '编辑';
@@ -62,6 +63,15 @@ for(var i = 0; i < keys.length; i++) {
       var inputUrl = prompt('请输入一个新网址');
       // save the new website
       hash[buttonName] = inputUrl;
+      // update the favivon of the website
+      newFavicon = clickedBtn.target.previousSibling;
+      newFavicon.src = 'http://' + inputUrl + '/favicon.ico';
+      console.log(newFavicon.src);
+      newFavicon.onerror = function(error){
+					// error.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+          // hidden the unfounded image
+          error.target.hidden = true;
+        }
       // set the new hash in localStorage
       localStorage.setItem('newUrl',JSON.stringify(hash));
     }
@@ -69,8 +79,21 @@ for(var i = 0; i < keys.length; i++) {
 
     // add the icon of the website
     var iconImg = document.createElement('img');
-    iconImg.src = 'http://' + hash[keys[i][j]] + '/favicon.ico';
-    console.log(iconImg.src);
+    if (hash[keys[i][j]]) { // if the hash has the right website
+      iconImg.src = 'http://' + hash[keys[i][j]] + '/favicon.ico';
+
+      // listen to the http image request error event
+      iconImg.onerror = function(error) {
+        // hidden the unfounded image
+        error.target.hidden = true;
+      }
+
+    } else {
+      //add icon label which can display default img when can not get the favicon
+      var iconNoImg = document.createElement('i');
+      iconNoImg.className = 'iconfont icon-cry';
+      kbd.appendChild(iconNoImg);
+    }
     kbd.append(iconImg);
   }
 }

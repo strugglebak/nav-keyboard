@@ -1,24 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-a {
-  text-decoration: none;
-}
-body {
-  background: #747980 url('images/wall8.jpg') no-repeat center center;
-  background-size: cover;
-}
-
-.icon {
-  width: 1em; height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
+* {margin: 0;padding: 0;}
+a {text-decoration: none;}
+body {background: #747980 url('images/wall8.jpg') no-repeat center center;background-size: cover;}
 
 main {
-  border: 1px solid red;
   /* 使键盘整体居中 */
   display: flex;
   /* 左右居中 */
@@ -30,7 +14,6 @@ main {
   /* 让 main 与 body 一样高*/
   height: 100vh;
 }
-
 
 .row {
   margin: 7px 0;
