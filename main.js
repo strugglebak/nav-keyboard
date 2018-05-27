@@ -28,7 +28,6 @@ var hashLocalStorage = JSON.parse(localStorage.getItem('newUrl') || 'null');
 // update the hash
 if (hashLocalStorage) {
   hash = hashLocalStorage;
-  console.log(hash);
 }
 
 // Generate the keyboard
@@ -52,28 +51,34 @@ for(var i = 0; i < keys.length; i++) {
     span.textContent = keys[i][j];
     kbd.appendChild(span);
 
-
     // add edit button
     var editButton = document.createElement('button');
     editButton.textContent = '编辑';
     editButton.id = keys[i][j];
-    editButton.onclick = function(clickedBtn) {
-      var buttonName = clickedBtn.target.id;
-      // console.log(buttonId);
+    editButton.onclick = function(clickedElement) {
+      var buttonName = clickedElement.target.id;
       var inputUrl = prompt('请输入一个新网址');
+      if (inputUrl === null) {
+        return ;
+      }
       // save the new website
       hash[buttonName] = inputUrl;
+
       // update the favivon of the website
-      newFavicon = clickedBtn.target.previousSibling;
+      newFavicon = clickedElement.target.nextSibling;
+      if (newFavicon.className === 'iconfont icon-cry') { // iconfont node
+        newFavicon = newFavicon.nextSibling;
+      }
+
       newFavicon.src = 'http://' + inputUrl + '/favicon.ico';
-      console.log(newFavicon.src);
-      newFavicon.onerror = function(error){
-					// error.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
-          // hidden the unfounded image
-          error.target.hidden = true;
+      newFavicon.hidden = false;
+
+      console.log(newFavicon);
+      newFavicon.onerror = function(error) {
+        error.target.hidden = true;
         }
       // set the new hash in localStorage
-      localStorage.setItem('newUrl',JSON.stringify(hash));
+      localStorage.setItem('newUrl', JSON.stringify(hash));
     }
     kbd.append(editButton);
 
@@ -81,20 +86,17 @@ for(var i = 0; i < keys.length; i++) {
     var iconImg = document.createElement('img');
     if (hash[keys[i][j]]) { // if the hash has the right website
       iconImg.src = 'http://' + hash[keys[i][j]] + '/favicon.ico';
-
-      // listen to the http image request error event
-      iconImg.onerror = function(error) {
-        // hidden the unfounded image
-        error.target.hidden = true;
-      }
-
-    } else {
+    } else { // undefined or null
       //add icon label which can display default img when can not get the favicon
       var iconNoImg = document.createElement('i');
       iconNoImg.className = 'iconfont icon-cry';
       kbd.appendChild(iconNoImg);
     }
     kbd.append(iconImg);
+    // listen to the http image request error event
+    iconImg.onerror = function(error) {
+      error.target.hidden = true;
+    }
   }
 }
 
